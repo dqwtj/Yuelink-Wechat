@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="style/360player.css" />
+<script type="text/javascript" charset="utf-8" src="js/commonFunc.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="js/soundmanager2-nodebug-jsmin.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/yuelink.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="js/360player.js"></script>
+<title>乐聆网——移动版</title>
+</head>
+
+<body>
+	<div class="content">
+		<div class="inner">
+			<div class="topBar">
+				<div class="topBar-title title">
+					<span class="BigTitle"> 频道·<span id="singer-title">黄巨人</span>
+					</span> <br> 点击右上按钮 分享好音乐
+				</div>
+				<div class="high-quality title">
+					<div class="high-open"></div>
+					<br> 高品质MP3<br>推荐wifi下使用
+				</div>
+			</div>
+			<div class="container">
+				<div style="width:100%;heigth:138px;"></div>
+				<div class="list">
+					<div class="item">
+						<div class="songInfo">
+							<span class="songtitle">好汉歌·黄巨人</span> <br> <span
+								class="comment">黄菊人首席混音师</span>
+						</div>
+					</div>
+				</div>
+				<div class="list">
+					<div class="item-expand">
+						<div class="ui360">
+							<a href="/path/to/an.mp3">play "an.mp3"</a>
+						</div>
+						<div class="songInfo">
+							<span class="songtitle">红色高跟鞋·赵广上</span> <br> <span
+								class="comment">黄菊人首席混音师的徒弟</span>
+						</div>
+					</div>
+					<div class="expand">
+						<div class="good-button button">
+							<div class="good"></div>
+							<div class="wrapper"></div>
+							赞 2,719
+						</div>
+						<div class="play-button button">
+							<div class="play"></div>
+							<div class="wrapper"></div>
+							02:12 / 03:43
+						</div>
+						<div class="view-button button">
+							<div class="view"></div>
+							<div class="wrapper"></div>
+							浏览 24,953
+						</div>
+					</div>
+				</div>
+				<div class="list">
+					<div class="item"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+<script type="text/javascript">
+	yuelink_initialize();
+
+	var nid = getPar("node");
+
+	var nodeid = 33;
+	if (nid) {
+		nodeid = nid;
+	}
+
+	var sid = getPar("song");
+	if (!sid || sid == "") {
+		sid = 0;
+	}
+	//	loadsongs(nodeid, sid);
+
+	var soundManagerReadyCheck = setInterval(function() {
+		if (soundManagerReady) {
+			clearInterval(soundManagerReadyCheck);
+		}
+	}, 50);
+
+	$(document).ready(function() {
+
+		var sharp = getSharp();
+		if (sharp) {
+			var evt = document.createEvent("MouseEvents");
+			evt.initEvent("click", false, false);// 或用initMouseEvent()，不过需要更多参数 
+			$("#" + sharp).get(0).dispatchEvent(evt);
+		}
+	});
+</script>
+
+</body>
+</html>
