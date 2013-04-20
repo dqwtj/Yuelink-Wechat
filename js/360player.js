@@ -54,9 +54,9 @@ ThreeSixtyPlayer; // constructor
 		// 360player configuration options
 		this.config = {
 
-			playNext : false, // stop after one sound, or play through list
+			playNext : true, // stop after one sound, or play through list
 								// until end
-			autoPlay : false, // start playing the first sound right away
+			autoPlay : true, // start playing the first sound right away
 			allowMultiple : false, // let many sounds play at once (false =
 									// only one sound playing at a time)
 			loadRingColor : '#ccc', // how much has loaded
@@ -111,7 +111,7 @@ ThreeSixtyPlayer; // constructor
 
 			fontSizeMax : null, // set according to CSS
 
-			scaleArcWidth : 1, // thickness factor of playback progress ring
+			scaleArcWidth : 0.33, // thickness factor of playback progress ring
 
 			useFavIcon : false
 		// Experimental (also requires usePeakData: true).. Try to draw a "VU
@@ -1212,6 +1212,7 @@ ThreeSixtyPlayer; // constructor
 			var oItems = self.getElementsByClassName('ui360', 'div'), i, j, oLinks = [], is_vis = false, foundItems = 0, oCanvas, oCanvasCTX, oCover, diameter, radius, uiData, uiDataVis, oUI, oBtn, o, o2, oID;
 
 			for (i = 0, j = oItems.length; i < j; i++) {
+				//这里获取mp3信息
 				oLinks.push(oItems[i].getElementsByTagName('a')[0]);
 				// remove "fake" play button (unsupported case)
 				oItems[i].style.backgroundImage = 'none';

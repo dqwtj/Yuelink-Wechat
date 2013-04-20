@@ -14,9 +14,9 @@ div,a {
 	padding: 0px;
 }
 
-.wrapper{
-	width:100%;
-	height:14px;
+.wrapper {
+	width: 100%;
+	height: 14px;
 }
 
 div.content {
@@ -35,6 +35,7 @@ div.topBar {
 	top: 0;
 	height: 138px;
 	width: 640px;
+	z-index: 1000;
 	background: url(../img/topbar.png) 0px 0px no-repeat;
 }
 
@@ -52,6 +53,7 @@ div.item {
 	height: 138px;
 	background: url(../img/list-back.png) 0px 0px no-repeat;
 	z-index: 100;
+	position: relative;
 }
 
 div.item-expand {
@@ -70,7 +72,7 @@ div.expand {
 }
 
 div.good-button {
-	margin-left:1px;
+	margin-left: 1px;
 	width: 210px;
 	height: 149px;
 	background: url(../img/good-back.png) 0px 0px no-repeat;
@@ -91,11 +93,11 @@ div.view-button {
 div.button {
 	float: left;
 	z-index: 1;
-	text-align:center;
+	text-align: center;
 	position: relative;
-	padding-top:35px;
-	color:white;
-	font-size:24px;
+	padding-top: 35px;
+	color: white;
+	font-size: 24px;
 }
 
 div.topBar-title {
@@ -116,11 +118,12 @@ span.BigTitle {
 }
 
 div.high-quality {
-	text-align: center; position : relative;
+	text-align: center;
+	position: relative;
 	top: -158px;
 	right: 28px;
 	float: right;
-	font-size:18px;
+	font-size: 18px;
 	position: relative;
 }
 
@@ -142,51 +145,79 @@ div.high-close {
 	background: url(../img/close-high.png) 0px 0px no-repeat;
 }
 
-div.good{
+div.good {
 	background: url(../img/good.png) no-repeat;
 	background-position: center;
-	background-size:34px 34px;
-	width:100%;
-	height:40px;
+	background-size: 34px 34px;
+	width: 100%;
+	height: 40px;
 }
 
-div.play{
+div.play {
 	background: url(../img/play.png) no-repeat;
 	background-position: center;
-	background-size:25px 28px;
-	width:100%;
-	height:40px;	
+	background-size: 25px 28px;
+	width: 100%;
+	height: 40px;
 }
 
-div.pause{
+div.pause {
 	background: url(../img/pause.png) no-repeat;
 	background-position: center;
-	background-size:25px 28px;
-	width:100%;
-	height:40px;	
+	background-size: 25px 28px;
+	width: 100%;
+	height: 40px;
 }
 
-div.view{
+div.view {
 	background: url(../img/view.png) no-repeat;
 	background-position: center;
-	background-size:38px 22px;
-	width:100%;
-	height:40px;	
+	background-size: 38px 22px;
+	width: 100%;
+	height: 40px;
 }
 
 div.songInfo {
-	text-align:left;
-	margin-left:150px;
-	height:100%;
-	padding-top:30px;
+	position: absolute;
+	left: 138px;
+	top: 0px; text-align : left;
+	height: 100%;
+	padding-top: 30px;
+	text-align: left;
 }
 
-span.songtitle{
-	font-size:36px;
-	color:#5E6D81;
+span.songtitle {
+	font-size: 36px;
+	color: #5E6D81;
 }
 
-span.comment{
-	font-size:24px;
-	color:#959EAA;
+span.comment {
+	font-size: 24px;
+	color: #959EAA;
+}
+
+div.song-play {
+	position: absolute;
+	top: 0px;
+	left: 0px; height : 100%;
+	padding: 3px 5px 0px 5px;
+	height: 100%;
+}
+
+div.sample1 {
+	left: 25px;
+	top: 22px;
+	position: absolute;
+	width: 90px;
+	height: 90px;
+	background: url(../img/sample-pic1.png) 0px 0px no-repeat;
+}
+
+div.sample2 {
+	left: 25px;
+	top: 22px;
+	position: absolute;
+	width: 90px;
+	height: 90px;
+	background: url(../img/sample-pic2.png) 0px 0px no-repeat;
 }
