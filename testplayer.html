@@ -4,17 +4,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/360player.css" />
-<script type="text/javascript" charset="utf-8" src="js/commonFunc.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="js/soundmanager2-nodebug-jsmin.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/yuelink.js"></script>
+<script type="text/javascript" src="js/berniecode-animator.js"></script>
+<script type="text/javascript" src="js/soundmanager2.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script type="text/javascript" src="js/360player.js"></script>
+<script type="text/javascript">
+soundManager.setup({
+  // path to directory containing SM2 SWF
+  url: 'swf/'
+});
+</script>
 <title>乐聆网——移动版</title>
 </head>
 
@@ -22,42 +25,8 @@
 <div class="ui360">
  <a href="mp3/tears.mp3">play "an.mp3"</a>
 </div>
-</body>
-
-
-
-<script type="text/javascript">
-	yuelink_initialize();
-
-	var nid = getPar("node");
-
-	var nodeid = 33;
-	if (nid) {
-		nodeid = nid;
-	}
-
-	var sid = getPar("song");
-	if (!sid || sid == "") {
-		sid = 0;
-	}
-	//	loadsongs(nodeid, sid);
-
-	var soundManagerReadyCheck = setInterval(function() {
-		if (soundManagerReady) {
-			clearInterval(soundManagerReadyCheck);
-		}
-	}, 50);
-
-	$(document).ready(function() {
-
-		var sharp = getSharp();
-		if (sharp) {
-			var evt = document.createEvent("MouseEvents");
-			evt.initEvent("click", false, false);// 或用initMouseEvent()，不过需要更多参数 
-			$("#" + sharp).get(0).dispatchEvent(evt);
-		}
-	});
+<script>
 </script>
-
 </body>
+
 </html>
