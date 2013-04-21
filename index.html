@@ -16,10 +16,14 @@
 <script type="text/javascript" src="js/360player.js"></script>
 <script type="text/javascript" src="js/yuelink-mobile.js"></script>
 <script type="text/javascript">
-	soundManager.setup({
-		// path to directory containing SM2 SWF
-		url : 'swf/'
-	});
+	var nid = (getPar("nid"));
+	
+	var nodeid=33;
+	if (nid){
+		nodeid = nid;
+	}
+	
+	loadsongs(nodeid);
 </script>
 <title>乐聆网——移动版</title>
 </head>
@@ -54,8 +58,8 @@
 					<div class="item-expand">
 						<div class="song-play">
 							<div class="sample1"></div>
-							<div class="ui360">
-								<a href="mp3/tears.mp3"></a>
+							<div class="ui360">	
+								<a href="mp3/tears.mp3"></a>						
 							</div>
 						</div>
 						<div class="songInfo">
