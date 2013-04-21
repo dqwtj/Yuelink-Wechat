@@ -3,9 +3,8 @@ var url_domain = "http://localhost/";
 var url_prefix = url_domain + "api/";
 var songdata;
 var songlinks = [];
-var ids = [];
 var songs;
-var current = 2;
+var current = 0;
 
 function loadsongs(nodeid){
 	
@@ -21,22 +20,39 @@ function loadsongs(nodeid){
 }
 
 function expand(index){
-	id = ids[index];
 	song = songs[index];
-	var parent = $(".list")[current];
+	var parent = $(".list")[index];
 	parent.innerHTML += genExpandHtml(song);
-	$(".item")[current].className = "item-expand";
+	$("div.play-button").unbind();
+	$("div.play-button").click(function(evt){
+		$("div.item-expand span.sm2-360btn").click();
+		if (soundManager){
+			alert(soundManager.isPaused());
+		}
+	});
+//	$(".item")[index].className = "item-expand";
 }
 
+function expandByIndex(index){
+	$(".item-expand").attr("class", "item");
+	$(".expand").hide();
+	$(".expand").eq(index).show();
+	$(".item")[index].className = "item-expand";
+	$("div.item-expand span.sm2-360btn").click();
+}
+
+
 function getData(data){
+//	alert(JSON.stringify(data));
 	songdata = data;
 	$(".container")[0].innerHTML = genListsHtml(data);
-	expand(current);
+	for (var i = 0; i < data.related_songs.length; i++)
+		expand(i);
 	soundManager.setup({
 		// path to directory containing SM2 SWF
 		url : 'swf/'
 	});
-//	alert(JSON.stringify(data));
+	expandByIndex(current);
 }
 
 function genListsHtml(data){
@@ -45,20 +61,19 @@ function genListsHtml(data){
 	var name = data.name;
 	$("#singer-title")[0].innerText = name;
 	for (var i = 0; i < songs.length; i++){
-		result += genListHtml(songs[i]);
+		result += genListHtml(songs[i], i);
 		songlinks.push(songs[i].mp3_url);
-		ids.push('ui-'+songs[i]._id);
 	}
 	return result;
 }
 
-function genListHtml(song){
+function genListHtml(song, index){
 	var singer = song.owner;
 	var name = song.name;
 	var mp3 = song.mp3_url;
-	var result = '<div class="list"><div class="item"><div class="song-play"><div class="sample2"></div>'
-		+ '<div id="ui-'+song._id+'" class="ui360"><a href="'+mp3+'"></a></div></div>'
-		+ '<div class="songInfo"><span class="songtitle">'+name+'·'+singer+'</span> <br> <span class="comment">黄菊人首席混音师</span>'
+	var result = '<div class="list" id="ui-'+index+'"><div class="item"><div class="song-play"><div class="avatar" style="background: url('+song.pic_normal_url+') 0px 0px no-repeat;"></div>'
+		+ '<div class="ui360"><a href="'+mp3+'"></a></div></div>'
+		+ '<div class="songInfo" onmousedown="expandByIndex('+index+')"><span class="songtitle">'+name+'·'+singer+'</span> <br> <span class="comment">黄菊人首席混音师</span>'
 			+ '</div></div></div>';
 	
 	return result;
@@ -66,7 +81,7 @@ function genListHtml(song){
 
 function genExpandHtml(song){
 	var result = '<div class="expand"><div class="good-button button"><div class="good"></div><div class="wrapper"></div>'
-		+'赞 2,719</div><div class="play-button button sm2-360btn"><div class="pause"></div>'
+		+'赞 2,719</div><div class="play-button button"><div class="pause"></div>'
 		+'<div class="wrapper"></div><span class="sm2-timing">00:00</span> / <span class="sm2-time">00:00</span>'
 		+'</div><div class="view-button button"><div class="view"></div><div class="wrapper"></div>浏览 24,953</div></div>';
 

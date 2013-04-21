@@ -111,7 +111,8 @@ ThreeSixtyPlayer; // constructor
 
 			fontSizeMax : null, // set according to CSS
 
-			scaleArcWidth : 0.38, // thickness factor of playback progress ring
+			scaleArcWidth : 0.2, // thickness factor of playback progress
+									// ring
 
 			useFavIcon : false
 		// Experimental (also requires usePeakData: true).. Try to draw a "VU
@@ -219,14 +220,6 @@ ThreeSixtyPlayer; // constructor
 					&& sParentNodeName === oChild.parentNode.nodeName
 							.toLowerCase() ? oChild.parentNode : null);
 
-		};
-		
-		this.getNodeByParentClass = function(className, parentClass) {
-			var items = $("." + className);
-			for (var i = 0; i < items.length; i++)
-				if (items[i].parentNode.parentNode.parentNode.className == parentClass){
-					return items[i];
-				}
 		};
 
 		this.getParentByClassName = function(oChild, sParentClassName) {
@@ -477,10 +470,10 @@ ThreeSixtyPlayer; // constructor
 						self.stopSound(self.lastSound);
 					}
 				}
-				if (thisSound.paused){
-					$("div.pause").attr("class","play");
+				if (thisSound.paused) {
+					$("div.pause").attr("class", "play");
 				} else {
-					$("div.play").attr("class","pause");
+					$("div.play").attr("class", "pause");
 				}
 
 			} else {
@@ -526,9 +519,10 @@ ThreeSixtyPlayer; // constructor
 							oContainer)[0],
 					oCanvas : self.getElementsByClassName('sm2-canvas',
 							'canvas', oContainer)[0],
-					oButton : self.getElementsByClassName('sm2-360btn', 'div')[0],
-					oTiming : self.getElementsByClassName('sm2-timing', 'span')[0],
-					oTime : self.getElementsByClassName('sm2-time', 'span')[0],
+					oButton : self.getElementsByClassName('sm2-360btn', 'span',
+							oContainer)[0],
+					oTiming : self.getElementsByClassName('sm2-timing', 'div',
+							oContainer)[0],
 					oCover : self.getElementsByClassName('sm2-cover', 'div',
 							oContainer)[0],
 					circleDiameter : diameter,
@@ -648,6 +642,10 @@ ThreeSixtyPlayer; // constructor
 
 		};
 
+		this.isPaused = function() {
+			return this.paused;
+		};
+
 		this.fanOut = function(oSound) {
 
 			var thisSound = oSound;
@@ -716,10 +714,12 @@ ThreeSixtyPlayer; // constructor
 		};
 
 		this.buttonClick = function(e) {
-		    var o = e?(e.target?e.target:e.srcElement):window.event.srcElement;
-		    if (self.getNodeByParentClass('sm2-360ui', 'item-expand') != undefined){
-		    	self.handleClick({target:self.getNodeByParentClass('sm2-360ui', 'item-expand').nextSibling}); // link next to the nodes we inserted
-		    }
+
+			var o = e ? (e.target ? e.target : e.srcElement)
+					: window.event.srcElement;
+			self.handleClick({
+				target : self.getParentByClassName(o, 'sm2-360ui').nextSibling
+			}); // link next to the nodes we inserted
 			return false;
 
 		};
@@ -984,10 +984,11 @@ ThreeSixtyPlayer; // constructor
 				this._360data.metadata.events.whileplaying();
 			}
 
-			if (this._360data.oTiming != null && timeNow !== this._360data.lastTime) {
+			if (timeNow !== this._360data.lastTime) {
 				this._360data.lastTime = timeNow;
-				this._360data.oTiming.innerHTML = getTimeStr(timeNow);
-				this._360data.oTime.innerHTML = getTimeStr(Math.floor(this.durationEstimate / 1000));
+				$('span.sm2-timing').text(getTimeStr(timeNow));
+				$('span.sm2-time').text(
+						getTimeStr(Math.floor(this.durationEstimate / 1000)));
 			}
 
 			// draw spectrum, if applicable
@@ -1003,7 +1004,6 @@ ThreeSixtyPlayer; // constructor
 			}
 
 		};
-		
 
 		this.updateWaveform = function(oSound) {
 
@@ -1146,7 +1146,7 @@ ThreeSixtyPlayer; // constructor
 			return [
 					'<canvas class="sm2-canvas" width="' + diameter
 							+ '" height="' + diameter + '"></canvas>',
-					'', // note
+					' <span class="sm2-360btn sm2-360btn-default"></span>', // note
 																			// use
 																			// of
 																			// imageMap,
@@ -1159,7 +1159,9 @@ ThreeSixtyPlayer; // constructor
 																			// a
 																			// different-size
 																			// image.
-					'', // + Ever-so-slight
+					' <div class="sm2-timing'
+							+ (navigator.userAgent.match(/safari/i) ? ' alignTweak'
+									: '') + '"></div>', // + Ever-so-slight
 														// Safari horizontal
 														// alignment tweak
 					' <div class="sm2-cover"></div>' ];
@@ -1194,7 +1196,7 @@ ThreeSixtyPlayer; // constructor
 			circleDiameter = parseInt(oFakeUIBox.offsetWidth, 10);
 			circleRadius = parseInt(circleDiameter / 2, 10);
 
-			oTiming = self.getElementsByClassName('sm2-timing', 'span', oTemp)[0];
+			oTiming = self.getElementsByClassName('sm2-timing', 'div', oTemp)[0];
 			fontSizeMax = parseInt(self.getStyle(oTiming, 'font-size'), 10);
 			if (isNaN(fontSizeMax)) {
 				// getStyle() etc. didn't work.
@@ -1217,12 +1219,12 @@ ThreeSixtyPlayer; // constructor
 		};
 
 		this.init = function() {
+
 			sm._writeDebug('threeSixtyPlayer.init()');
 
 			var oItems = self.getElementsByClassName('ui360', 'div'), i, j, oLinks = [], is_vis = false, foundItems = 0, oCanvas, oCanvasCTX, oCover, diameter, radius, uiData, uiDataVis, oUI, oBtn, o, o2, oID;
 
 			for (i = 0, j = oItems.length; i < j; i++) {
-				//这里获取mp3信息
 				oLinks.push(oItems[i].getElementsByTagName('a')[0]);
 				// remove "fake" play button (unsupported case)
 				oItems[i].style.backgroundImage = 'none';
@@ -1300,7 +1302,7 @@ ThreeSixtyPlayer; // constructor
 					}
 					oCover = self.getElementsByClassName('sm2-cover', 'div',
 							oLinks[i].parentNode)[0];
-					oBtn = self.getElementsByClassName('sm2-360btn', 'div')[0];
+					oBtn = oLinks[i].parentNode.getElementsByTagName('span')[0];
 					self.addEventHandler(oBtn, 'click', self.buttonClick);
 					if (!isTouchDevice) {
 						self.addEventHandler(oCover, 'mousedown',
@@ -1337,6 +1339,273 @@ ThreeSixtyPlayer; // constructor
 		};
 
 	}
+
+	// Optional: VU Meter component
+
+	ThreeSixtyPlayer.prototype.VUMeter = function(oParent) {
+
+		var self = oParent, me = this, _head = document
+				.getElementsByTagName('head')[0], isOpera = (navigator.userAgent
+				.match(/opera/i)), isFirefox = (navigator.userAgent
+				.match(/firefox/i));
+
+		this.vuMeterData = [];
+		this.vuDataCanvas = null;
+
+		this.setPageIcon = function(sDataURL) {
+
+			if (!self.config.useFavIcon || !self.config.usePeakData
+					|| !sDataURL) {
+				return false;
+			}
+
+			var link = document.getElementById('sm2-favicon');
+			if (link) {
+				_head.removeChild(link);
+				link = null;
+			}
+			if (!link) {
+				link = document.createElement('link');
+				link.id = 'sm2-favicon';
+				link.rel = 'shortcut icon';
+				link.type = 'image/png';
+				link.href = sDataURL;
+				document.getElementsByTagName('head')[0].appendChild(link);
+			}
+
+		};
+
+		this.resetPageIcon = function() {
+
+			if (!self.config.useFavIcon) {
+				return false;
+			}
+			var link = document.getElementById('favicon');
+			if (link) {
+				link.href = '/favicon.ico';
+			}
+
+		};
+
+		this.updateVU = function(oSound) {
+
+			if (soundManager.flashVersion >= 9 && self.config.useFavIcon
+					&& self.config.usePeakData) {
+				me.setPageIcon(me.vuMeterData[parseInt(
+						16 * oSound.peakData.left, 10)][parseInt(
+						16 * oSound.peakData.right, 10)]);
+			}
+
+		};
+
+		this.createVUData = function() {
+
+			var i = 0, j = 0, canvas = me.vuDataCanvas.getContext('2d'), vuGrad = canvas
+					.createLinearGradient(0, 16, 0, 0), bgGrad = canvas
+					.createLinearGradient(0, 16, 0, 0), outline = 'rgba(0,0,0,0.2)';
+
+			vuGrad.addColorStop(0, 'rgb(0,192,0)');
+			vuGrad.addColorStop(0.30, 'rgb(0,255,0)');
+			vuGrad.addColorStop(0.625, 'rgb(255,255,0)');
+			vuGrad.addColorStop(0.85, 'rgb(255,0,0)');
+			bgGrad.addColorStop(0, outline);
+			bgGrad.addColorStop(1, 'rgba(0,0,0,0.5)');
+			for (i = 0; i < 16; i++) {
+				me.vuMeterData[i] = [];
+			}
+			for (i = 0; i < 16; i++) {
+				for (j = 0; j < 16; j++) {
+					// reset/erase canvas
+					me.vuDataCanvas.setAttribute('width', 16);
+					me.vuDataCanvas.setAttribute('height', 16);
+					// draw new stuffs
+					canvas.fillStyle = bgGrad;
+					canvas.fillRect(0, 0, 7, 15);
+					canvas.fillRect(8, 0, 7, 15);
+					/*
+					 * // shadow canvas.fillStyle = 'rgba(0,0,0,0.1)';
+					 * canvas.fillRect(1,15-i,7,17-(17-i));
+					 * canvas.fillRect(9,15-j,7,17-(17-j));
+					 */
+					canvas.fillStyle = vuGrad;
+					canvas.fillRect(0, 15 - i, 7, 16 - (16 - i));
+					canvas.fillRect(8, 15 - j, 7, 16 - (16 - j));
+					// and now, clear out some bits.
+					canvas.clearRect(0, 3, 16, 1);
+					canvas.clearRect(0, 7, 16, 1);
+					canvas.clearRect(0, 11, 16, 1);
+					me.vuMeterData[i][j] = me.vuDataCanvas
+							.toDataURL('image/png');
+					// for debugging VU images
+					/*
+					 * var o = document.createElement('img');
+					 * o.style.marginRight = '5px'; o.src = vuMeterData[i][j];
+					 * document.documentElement.appendChild(o);
+					 */
+				}
+			}
+
+		};
+
+		this.testCanvas = function() {
+
+			// canvas + toDataURL();
+			var c = document.createElement('canvas'), ctx = null, ok;
+			if (!c || typeof c.getContext === 'undefined') {
+				return null;
+			}
+			ctx = c.getContext('2d');
+			if (!ctx || typeof c.toDataURL !== 'function') {
+				return null;
+			}
+			// just in case..
+			try {
+				ok = c.toDataURL('image/png');
+			} catch (e) {
+				// no canvas or no toDataURL()
+				return null;
+			}
+			// assume we're all good.
+			return c;
+
+		};
+
+		this.init = function() {
+
+			if (self.config.useFavIcon) {
+				me.vuDataCanvas = me.testCanvas();
+				if (me.vuDataCanvas && (isFirefox || isOpera)) {
+					// these browsers support dynamically-updating the favicon
+					me.createVUData();
+				} else {
+					// browser doesn't support doing this
+					self.config.useFavIcon = false;
+				}
+			}
+
+		};
+
+		this.init();
+
+	};
+
+	// completely optional: Metadata/annotations/segments code
+
+	ThreeSixtyPlayer.prototype.Metadata = function(oSound, oParent) {
+
+		soundManager._wD('Metadata()');
+
+		var me = this, oBox = oSound._360data.oUI360, o = oBox
+				.getElementsByTagName('ul')[0], oItems = o
+				.getElementsByTagName('li'), isFirefox = (navigator.userAgent
+				.match(/firefox/i)), isAlt = false, i, oDuration;
+
+		this.lastWPExec = 0;
+		this.refreshInterval = 250;
+		this.totalTime = 0;
+
+		this.events = {
+
+			whileplaying : function() {
+
+				var width = oSound._360data.width, radius = oSound._360data.radius, fullDuration = (oSound.durationEstimate || (me.totalTime * 1000)), isAlt = null, i, j, d;
+
+				for (i = 0, j = me.data.length; i < j; i++) {
+					isAlt = (i % 2 === 0);
+					oParent
+							.drawSolidArc(
+									oSound._360data.oCanvas,
+									(isAlt ? oParent.config.segmentRingColorAlt
+											: oParent.config.segmentRingColor),
+									isAlt ? width : width,
+									isAlt ? radius / 2 : radius / 2,
+									oParent
+											.deg2rad(360 * (me.data[i].endTimeMS / fullDuration)),
+									oParent
+											.deg2rad(360 * ((me.data[i].startTimeMS || 1) / fullDuration)),
+									true);
+				}
+				d = new Date();
+				if (d - me.lastWPExec > me.refreshInterval) {
+					me.refresh();
+					me.lastWPExec = d;
+				}
+
+			}
+
+		};
+
+		this.refresh = function() {
+
+			// Display info as appropriate
+			var i, j, index = null, now = oSound.position, metadata = oSound._360data.metadata.data;
+
+			for (i = 0, j = metadata.length; i < j; i++) {
+				if (now >= metadata[i].startTimeMS
+						&& now <= metadata[i].endTimeMS) {
+					index = i;
+					break;
+				}
+			}
+			if (index !== metadata.currentItem && index < metadata.length) {
+				// update
+				oSound._360data.oLink.innerHTML = metadata.mainTitle
+						+ ' <span class="metadata"><span class="sm2_divider"> | </span><span class="sm2_metadata">'
+						+ metadata[index].title + '</span></span>';
+				// self.setPageTitle(metadata[index].title+' |
+				// '+metadata.mainTitle);
+				metadata.currentItem = index;
+			}
+
+		};
+
+		this.strToTime = function(sTime) {
+			var segments = sTime.split(':'), seconds = 0, i;
+			for (i = segments.length; i--;) {
+				seconds += parseInt(segments[i], 10)
+						* Math.pow(60, segments.length - 1 - i); // hours,
+																	// minutes
+			}
+			return seconds;
+		};
+
+		this.data = [];
+		this.data.givenDuration = null;
+		this.data.currentItem = null;
+		this.data.mainTitle = oSound._360data.oLink.innerHTML;
+
+		for (i = 0; i < oItems.length; i++) {
+			this.data[i] = {
+				o : null,
+				title : oItems[i].getElementsByTagName('p')[0].innerHTML,
+				startTime : oItems[i].getElementsByTagName('span')[0].innerHTML,
+				startSeconds : me.strToTime(oItems[i]
+						.getElementsByTagName('span')[0].innerHTML.replace(
+						/[()]/g, '')),
+				duration : 0,
+				durationMS : null,
+				startTimeMS : null,
+				endTimeMS : null,
+				oNote : null
+			};
+		}
+		oDuration = oParent.getElementsByClassName('duration', 'div', oBox);
+		this.data.givenDuration = (oDuration.length ? me
+				.strToTime(oDuration[0].innerHTML) * 1000 : 0);
+		for (i = 0; i < this.data.length; i++) {
+			this.data[i].duration = parseInt(
+					this.data[i + 1] ? this.data[i + 1].startSeconds
+							: (me.data.givenDuration ? me.data.givenDuration
+									: oSound.durationEstimate) / 1000, 10)
+					- this.data[i].startSeconds;
+			this.data[i].startTimeMS = this.data[i].startSeconds * 1000;
+			this.data[i].durationMS = this.data[i].duration * 1000;
+			this.data[i].endTimeMS = this.data[i].startTimeMS
+					+ this.data[i].durationMS;
+			this.totalTime += this.data[i].duration;
+		}
+
+	};
 
 	if (navigator.userAgent.match(/webkit/i)
 			&& navigator.userAgent.match(/mobile/i)) {
@@ -1375,7 +1644,6 @@ ThreeSixtyPlayer; // constructor
 }(window));
 
 threeSixtyPlayer = new ThreeSixtyPlayer();
-
 
 // hook into SM2 init
 soundManager.onready(threeSixtyPlayer.init);

@@ -204,9 +204,17 @@ div.song-play {
 	height: 100%;
 }
 
+div.avatar {
+	left: 25px;
+	top: 23px;
+	position: absolute;
+	width: 90px;
+	height: 90px;
+}
+
 div.sample1 {
 	left: 25px;
-	top: 22px;
+	top: 23px;
 	position: absolute;
 	width: 90px;
 	height: 90px;
@@ -215,7 +223,7 @@ div.sample1 {
 
 div.sample2 {
 	left: 25px;
-	top: 22px;
+	top: 23px;
 	position: absolute;
 	width: 90px;
 	height: 90px;
