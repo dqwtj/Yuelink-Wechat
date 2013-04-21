@@ -8,16 +8,18 @@
 <link rel="stylesheet" type="text/css" href="style/360player.css" />
 <script type="text/javascript" charset="utf-8"
 	src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/commonFunc.js"></script>
 <script type="text/javascript" src="js/berniecode-animator.js"></script>
 <script type="text/javascript" src="js/soundmanager2.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script type="text/javascript" src="js/360player.js"></script>
+<script type="text/javascript" src="js/yuelink-mobile.js"></script>
 <script type="text/javascript">
-soundManager.setup({
-  // path to directory containing SM2 SWF
-  url: 'swf/'
-});
+	soundManager.setup({
+		// path to directory containing SM2 SWF
+		url : 'swf/'
+	});
 </script>
 <title>乐聆网——移动版</title>
 </head>
@@ -40,8 +42,7 @@ soundManager.setup({
 				<div class="list">
 					<div class="item">
 						<div class="song-play">
-							<div class="sample2">
-							</div>
+							<div class="sample2"></div>
 						</div>
 						<div class="songInfo">
 							<span class="songtitle">好汉歌·黄巨人</span> <br> <span
@@ -52,8 +53,7 @@ soundManager.setup({
 				<div class="list">
 					<div class="item-expand">
 						<div class="song-play">
-							<div class="sample1">
-							</div>
+							<div class="sample1"></div>
 							<div class="ui360">
 								<a href="mp3/tears.mp3"></a>
 							</div>
@@ -69,11 +69,10 @@ soundManager.setup({
 							<div class="wrapper"></div>
 							赞 2,719
 						</div>
-						<div class="play-button button">
-							<div class="play"></div>
+						<div class="play-button button sm2-360btn">
+							<div class="pause"></div>
 							<div class="wrapper"></div>
-							<span class="sm2-timing">02:12</span>
-							 / 03:43
+							<span class="sm2-timing">00:00</span> / <span class="sm2-time">00:00</span>
 						</div>
 						<div class="view-button button">
 							<div class="view"></div>

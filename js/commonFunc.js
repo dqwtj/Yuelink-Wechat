@@ -67,3 +67,13 @@ function isEmail(strEmail) {
 	else
 		alert("非法邮箱地址");
 }
+
+function getTimeStr(seconds){
+	var result = '';
+	var big = Math.floor(seconds / 60);
+	if (big < 10) big = "0" + big;
+	var small = seconds % 60;
+	if (small < 10) small  = "0" + small;
+	result =  big + ":" + small;
+	return result;
+}
