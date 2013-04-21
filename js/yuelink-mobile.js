@@ -5,7 +5,7 @@ var songdata;
 var songlinks = [];
 var ids = [];
 var songs;
-var current = 1;
+var current = 2;
 
 function loadsongs(nodeid){
 	

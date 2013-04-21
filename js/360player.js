@@ -220,6 +220,14 @@ ThreeSixtyPlayer; // constructor
 							.toLowerCase() ? oChild.parentNode : null);
 
 		};
+		
+		this.getNodeByParentClass = function(className, parentClass) {
+			var items = $("." + className);
+			for (var i = 0; i < items.length; i++)
+				if (items[i].parentNode.parentNode.parentNode.className == parentClass){
+					return items[i];
+				}
+		};
 
 		this.getParentByClassName = function(oChild, sParentClassName) {
 
@@ -708,9 +716,10 @@ ThreeSixtyPlayer; // constructor
 		};
 
 		this.buttonClick = function(e) {
-			self.handleClick({
-				target : self.getElementsByClassName('sm2-360ui', 'div')[0].nextSibling
-			}); // link next to the nodes we inserted
+		    var o = e?(e.target?e.target:e.srcElement):window.event.srcElement;
+		    if (self.getNodeByParentClass('sm2-360ui', 'item-expand') != undefined){
+		    	self.handleClick({target:self.getNodeByParentClass('sm2-360ui', 'item-expand').nextSibling}); // link next to the nodes we inserted
+		    }
 			return false;
 
 		};
@@ -1312,7 +1321,7 @@ ThreeSixtyPlayer; // constructor
 				self.addEventHandler(document, 'click', self.handleClick);
 				if (self.config.autoPlay) {
 					self.handleClick({
-						target : self.links[0],
+						target : self.links[current],
 						preventDefault : function() {
 						}
 					});
@@ -1366,6 +1375,7 @@ ThreeSixtyPlayer; // constructor
 }(window));
 
 threeSixtyPlayer = new ThreeSixtyPlayer();
+
 
 // hook into SM2 init
 soundManager.onready(threeSixtyPlayer.init);
