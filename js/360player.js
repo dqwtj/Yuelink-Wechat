@@ -56,7 +56,7 @@ ThreeSixtyPlayer; // constructor
 
 			playNext : true, // stop after one sound, or play through list
 								// until end
-			autoPlay : true, // start playing the first sound right away
+			autoPlay : false, // start playing the first sound right away
 			allowMultiple : false, // let many sounds play at once (false =
 									// only one sound playing at a time)
 			loadRingColor : '#ccc', // how much has loaded
@@ -423,7 +423,7 @@ ThreeSixtyPlayer; // constructor
 		};
 
 		this.handleClick = function(e) {
-
+//			alert(10);
 			// a sound link was clicked
 			if (e.button > 1) {
 				// only catch left-clicks
@@ -454,14 +454,14 @@ ThreeSixtyPlayer; // constructor
 			sm._writeDebug('handleClick()');
 			soundURL = (o.href);
 			thisSound = self.getSoundByURL(soundURL);
-
+			
 			if (thisSound) {
-
 				// already exists
 				if (thisSound === self.lastSound) {
+					
 					// and was playing (or paused)
 					thisSound.togglePause();
-				} else {
+				} else {			
 					// different sound
 					thisSound.togglePause(); // start playing current
 					sm._writeDebug('sound different than last sound: '
@@ -501,7 +501,7 @@ ThreeSixtyPlayer; // constructor
 					useEQData : (has_vis && self.config.useEQData),
 					usePeakData : (has_vis && self.config.usePeakData)
 				});
-
+				
 				// tack on some custom data
 
 				diameter = parseInt(self.getElementsByClassName('sm2-360ui',
@@ -597,7 +597,7 @@ ThreeSixtyPlayer; // constructor
 					},
 					fps : 0
 				};
-
+				
 				// "Metadata" (annotations)
 				if (typeof self.Metadata !== 'undefined'
 						&& self.getElementsByClassName('metadata', 'div',
@@ -627,7 +627,6 @@ ThreeSixtyPlayer; // constructor
 					self.stopSound(self.lastSound);
 				}
 				thisSound.play();
-
 			}
 
 			self.lastSound = thisSound; // reference for next call
@@ -647,7 +646,6 @@ ThreeSixtyPlayer; // constructor
 		};
 
 		this.fanOut = function(oSound) {
-
 			var thisSound = oSound;
 			if (thisSound._360data.animating === 1) {
 				return false;
@@ -655,6 +653,7 @@ ThreeSixtyPlayer; // constructor
 			thisSound._360data.animating = 0;
 			soundManager._writeDebug('fanOut: ' + thisSound.id + ': '
 					+ thisSound._360data.oLink.href);
+
 			thisSound._360data.oAnim.seekTo(1); // play to end
 			window.setTimeout(function() {
 				// oncomplete hack
@@ -714,7 +713,7 @@ ThreeSixtyPlayer; // constructor
 		};
 
 		this.buttonClick = function(e) {
-
+//			alert(8);
 			var o = e ? (e.target ? e.target : e.srcElement)
 					: window.event.srcElement;
 			self.handleClick({
@@ -1644,6 +1643,3 @@ ThreeSixtyPlayer; // constructor
 }(window));
 
 threeSixtyPlayer = new ThreeSixtyPlayer();
-
-// hook into SM2 init
-soundManager.onready(threeSixtyPlayer.init);

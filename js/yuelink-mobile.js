@@ -5,6 +5,7 @@ var songdata;
 var songlinks = [];
 var songs;
 var current = 0;
+var soundManagerReady = false;
 
 function loadsongs(nodeid){
 	
@@ -25,10 +26,8 @@ function expand(index){
 	parent.innerHTML += genExpandHtml(song);
 	$("div.play-button").unbind();
 	$("div.play-button").click(function(evt){
-//		$("div.item-expand span.sm2-360btn").click();
-		invokeClick($("div.item-expand span.sm2-360btn")[0]);
+		$("div.item-expand span.sm2-360btn").click();
 	});
-//	$(".item")[index].className = "item-expand";
 }
 
 function expandByIndex(index){
@@ -37,7 +36,11 @@ function expandByIndex(index){
 	$(".expand").eq(index).show();
 	$(".item")[index].className = "item-expand";
 //	$("div.item-expand span.sm2-360btn").click();
-	invokeClick($("div.item-expand span.sm2-360btn")[0]);
+//	threeSixtyPlayer.events.play();
+	setTimeout(function(){	
+		$("div.item-expand span.sm2-360btn").click();
+	},20);
+//	$("div.play-button").click();
 }
 
 
@@ -47,11 +50,24 @@ function getData(data){
 	$(".container")[0].innerHTML = genListsHtml(data);
 	for (var i = 0; i < data.related_songs.length; i++)
 		expand(i);
+	$(".expand").hide();
+	soundManager.onready(function(){
+//		alert("ready");
+		soundManagerReady = true;
+	});
 	soundManager.setup({
 		// path to directory containing SM2 SWF
 		url : 'swf/'
 	});
-	expandByIndex(current);
+	if (data.related_songs.length > 0){
+		var soundManagerReadyCheck = setInterval(function(){
+			if (soundManagerReady) {
+				clearInterval(soundManagerReadyCheck);
+				threeSixtyPlayer.init();
+				expandByIndex(current);
+			}
+		}, 50);
+	}
 }
 
 function genListsHtml(data){
@@ -72,7 +88,7 @@ function genListHtml(song, index){
 	var mp3 = song.mp3_url;
 	var result = '<div class="list" id="ui-'+index+'"><div class="item"><div class="song-play"><div class="avatar" style="background: url('+song.pic_normal_url+') 0px 0px no-repeat;"></div>'
 		+ '<div class="ui360"><a href="'+mp3+'"></a></div></div>'
-		+ '<div class="songInfo" onmousedown="expandByIndex('+index+')"><span class="songtitle">'+name+'·'+singer+'</span> <br> <span class="comment">黄菊人首席混音师</span>'
+		+ '<div class="songInfo" onclick="expandByIndex('+index+')"><span class="songtitle">'+name+'·'+singer+'</span> <br> <span class="comment">黄菊人首席混音师</span>'
 			+ '</div></div></div>';
 	
 	return result;
