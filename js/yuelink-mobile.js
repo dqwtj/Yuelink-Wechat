@@ -25,10 +25,8 @@ function expand(index){
 	parent.innerHTML += genExpandHtml(song);
 	$("div.play-button").unbind();
 	$("div.play-button").click(function(evt){
-		$("div.item-expand span.sm2-360btn").click();
-		if (soundManager){
-			alert(soundManager.isPaused());
-		}
+//		$("div.item-expand span.sm2-360btn").click();
+		invokeClick($("div.item-expand span.sm2-360btn")[0]);
 	});
 //	$(".item")[index].className = "item-expand";
 }
@@ -38,7 +36,8 @@ function expandByIndex(index){
 	$(".expand").hide();
 	$(".expand").eq(index).show();
 	$(".item")[index].className = "item-expand";
-	$("div.item-expand span.sm2-360btn").click();
+//	$("div.item-expand span.sm2-360btn").click();
+	invokeClick($("div.item-expand span.sm2-360btn")[0]);
 }
 
 

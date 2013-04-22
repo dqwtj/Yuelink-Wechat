@@ -52,8 +52,11 @@ function getIndexOfSongInNodes(songs, sid) {
 
 function getWeiboShareApi(nid, sid, picurl, name, singer, songurl) {
 	var url = "http://service.weibo.com/share/share.php?";
-	url += "url=" + escape("http://www.yuelink.com/?node=" + nid + "&song=" + sid);
-	url += "&title=" + encodeURIComponent("我在 #乐聆网# 发现了来自" + singer + "的《" + name + "》，推荐给大家");
+	url += "url="
+			+ escape("http://www.yuelink.com/?node=" + nid + "&song=" + sid);
+	url += "&title="
+			+ encodeURIComponent("我在 #乐聆网# 发现了来自" + singer + "的《" + name
+					+ "》，推荐给大家");
 	url += "&pic=" + escape(picurl);
 	url += "&ralateUid=2345174633";
 	url += "&language=zh_cn";
@@ -68,12 +71,26 @@ function isEmail(strEmail) {
 		alert("非法邮箱地址");
 }
 
-function getTimeStr(seconds){
+function getTimeStr(seconds) {
 	var result = '';
 	var big = Math.floor(seconds / 60);
-	if (big < 10) big = "0" + big;
+	if (big < 10)
+		big = "0" + big;
 	var small = seconds % 60;
-	if (small < 10) small  = "0" + small;
-	result =  big + ":" + small;
+	if (small < 10)
+		small = "0" + small;
+	result = big + ":" + small;
 	return result;
+}
+
+function invokeClick(element) {
+	if (element.click)
+		element.click(); // 判断是否支持click() 事件
+	else if (element.fireEvent)
+		element.fireEvent('onclick'); // 触发click() 事件
+	else if (document.createEvent) {
+		var evt = document.createEvent("MouseEvents"); // 创建click() 事件
+		evt.initEvent("click", true, true); // 初始化click() 事件
+		element.dispatchEvent(evt); // 分发click() 事件
+	}
 }
