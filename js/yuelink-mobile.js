@@ -64,7 +64,7 @@ function getData(data){
 			if (soundManagerReady) {
 				clearInterval(soundManagerReadyCheck);
 				threeSixtyPlayer.init();
-				expandByIndex(current);
+//				expandByIndex(current);
 			}
 		}, 50);
 	}
