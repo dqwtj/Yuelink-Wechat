@@ -1,5 +1,5 @@
 //var url_domain = "http://www.yuelink.com/";
-var url_domain = "http://localhost/";
+var url_domain = "http://" + document.location.host + "/";
 var url_prefix = url_domain + "api/";
 var songdata;
 var songlinks = [];
