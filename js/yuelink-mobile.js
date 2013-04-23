@@ -131,6 +131,7 @@ function genExpandHtml(song, index){
 function clickMp3Quality(){
 	if (quality_high){
 		$("div.high-open").attr("class", "high-close");
+//		$("div.ui360 a").eq(0).attr("href", "1.mp3");
 		quality_high = false;
 	} else {
 		$("div.high-close").attr("class", "high-open");

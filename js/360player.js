@@ -434,7 +434,7 @@ ThreeSixtyPlayer; // constructor
 			}
 
 			var o = self.getTheDamnLink(e), sURL, soundURL, thisSound, oContainer, has_vis, diameter;
-
+			
 			if (o.nodeName.toLowerCase() !== 'a') {
 				o = self.isChildOfNode(o, 'a');
 				if (!o) {
@@ -448,7 +448,7 @@ ThreeSixtyPlayer; // constructor
 			}
 
 			sURL = o.getAttribute('href');
-
+			alert(sURL);
 			if (!o.href || !sm.canPlayLink(o)
 					|| self.hasClass(o, self.excludeClass)) {
 				return true; // pass-thru for non-MP3/non-links
