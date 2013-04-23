@@ -7,6 +7,24 @@ var songs;
 var current = 0;
 var soundManagerReady = false;
 
+//触发safari下点击事件的nb方法
+function triggerClick(el) {
+	var nodeName = el.nodeName, safari_chrome = /webkit/
+			.test(navigator.userAgent.toLowerCase());
+	if (safari_chrome && (nodeName != 'INPUT' || nodeName != 'BUTTON')) {
+		try {
+			var evt = document.createEvent('Event');
+			evt.initEvent('click', true, true);
+			el.dispatchEvent(evt);
+		} catch (e) {
+			alert(e)
+		}
+		;
+	} else {
+		el.click();
+	}
+}
+
 function loadsongs(nodeid){
 	
 	//var apiurl = 'http://www.yuelink.com/api/nodes/' + nodeid +'.json';
@@ -26,7 +44,7 @@ function expand(index){
 	parent.innerHTML += genExpandHtml(song);
 	$("div.play-button").unbind();
 	$("div.play-button").click(function(evt){
-		$("div.item-expand span.sm2-360btn").click();
+		triggerClick($("div.item-expand span.sm2-360btn")[0]);
 	});
 }
 
@@ -38,7 +56,7 @@ function expandByIndex(index){
 //	$("div.item-expand span.sm2-360btn").click();
 //	threeSixtyPlayer.events.play();
 	setTimeout(function(){	
-		$("div.item-expand span.sm2-360btn").click();
+		triggerClick($("div.item-expand span.sm2-360btn")[0]);
 	},20);
 //	$("div.play-button").click();
 }

@@ -1622,8 +1622,7 @@ ThreeSixtyPlayer; // constructor
 																// output
 		consoleOnly : true,
 		flashVersion : 9,
-		useHighPerformance : true,
-		useFlashBlock : true
+		useHighPerformance : true
 	});
 
 	// FPS data, testing/debug only
