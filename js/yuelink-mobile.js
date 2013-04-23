@@ -4,7 +4,7 @@ var url_prefix = url_domain + "api/";
 var songdata;
 var songlinks = [];
 var songs;
-var current = 0;
+var current = -1;
 var soundManagerReady = false;
 
 //触发safari下点击事件的nb方法
@@ -49,6 +49,8 @@ function expand(index){
 }
 
 function expandByIndex(index){
+	if (current == index) return true;
+	current = index;
 	$(".item-expand").attr("class", "item");
 	$(".expand").hide();
 	$(".expand").eq(index).show();
