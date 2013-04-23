@@ -54,6 +54,7 @@ function expandByIndex(index){
 	current = index;
 	$(".item-expand").attr("class", "item");
 	$(".expand").hide();
+	if (index < 0) return;
 	$(".expand").eq(index).show();
 	$(".item")[index].className = "item-expand";
 //	$("div.item-expand span.sm2-360btn").click();

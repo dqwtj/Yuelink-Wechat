@@ -378,6 +378,8 @@ ThreeSixtyPlayer; // constructor
 //							'target' : pl.links[nextLink]
 //						});
 						expandByIndex(nextLink);
+					} else {
+						expandByIndex(-1);
 					}
 				}
 			},
