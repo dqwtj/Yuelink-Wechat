@@ -374,9 +374,10 @@ ThreeSixtyPlayer; // constructor
 				if (pl.config.playNext) {
 					nextLink = (pl.indexByURL[this._360data.oLink.href] + 1);
 					if (nextLink < pl.links.length) {
-						pl.handleClick({
-							'target' : pl.links[nextLink]
-						});
+//						pl.handleClick({
+//							'target' : pl.links[nextLink]
+//						});
+						expandByIndex(nextLink);
 					}
 				}
 			},
