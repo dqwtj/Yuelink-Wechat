@@ -178,10 +178,11 @@ div.view {
 }
 
 div.songInfo {
+	width:80%;
+	height:100%;
 	position: absolute;
 	left: 138px;
 	top: 0px; text-align : left;
-	height: 100%;
 	padding-top: 30px;
 	text-align: left;
 }
@@ -189,6 +190,11 @@ div.songInfo {
 span.songtitle {
 	font-size: 36px;
 	color: #5E6D81;
+	display:block;
+	width:100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
 }
 
 span.comment {

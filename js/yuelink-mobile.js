@@ -11,6 +11,7 @@ var soundManagerReady = false;
 function triggerClick(el) {
 	var nodeName = el.nodeName, safari_chrome = /webkit/
 			.test(navigator.userAgent.toLowerCase());
+	if (nodeName == undefined) return false;
 	if (safari_chrome && (nodeName != 'INPUT' || nodeName != 'BUTTON')) {
 		try {
 			var evt = document.createEvent('Event');
