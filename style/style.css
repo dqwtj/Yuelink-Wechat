@@ -221,22 +221,15 @@ div.avatar {
 	position: absolute;
 	width: 90px;
 	height: 90px;
+	z-index:13;
 }
 
-div.sample1 {
+div.avatar-cover {
 	left: 25px;
 	top: 23px;
 	position: absolute;
 	width: 90px;
 	height: 90px;
-	background: url(../img/sample-pic1.png) 0px 0px no-repeat;
-}
-
-div.sample2 {
-	left: 25px;
-	top: 23px;
-	position: absolute;
-	width: 90px;
-	height: 90px;
-	background: url(../img/sample-pic2.png) 0px 0px no-repeat;
+	background: url(../img/cover.png) 0px 0px no-repeat;
+	z-index:14;	
 }

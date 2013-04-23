@@ -108,7 +108,7 @@ function genListHtml(song, index){
 	var singer = song.owner;
 	var name = song.name;
 	var mp3 = song.mp3_url;
-	var result = '<div class="list" id="ui-'+index+'"><div class="item"><div class="song-play"><div class="avatar" style="background: url('+song.pic_normal_url+') 0px 0px no-repeat;"></div>'
+	var result = '<div class="list" id="ui-'+index+'"><div class="item"><div class="song-play"><div class="avatar-cover"></div><div class="avatar" style="background: url('+song.pic_normal_url+') 0px 0px no-repeat;"></div>'
 		+ '<div class="ui360"><a href="'+mp3+'"></a></div></div>'
 		+ '<div class="songInfo" onclick="expandByIndex('+index+')"><span class="songtitle">'+name+'·'+singer+'</span> <br> <span class="comment">黄菊人首席混音师</span>'
 			+ '</div></div></div>';
