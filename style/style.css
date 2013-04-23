@@ -78,6 +78,10 @@ div.good-button {
 	background: url(../img/good-back.png) 0px 0px no-repeat;
 }
 
+div.pink{
+	background: url(../img/pink.png) 0px 0px no-repeat;	
+}
+
 div.play-button {
 	width: 207px;
 	height: 149px;

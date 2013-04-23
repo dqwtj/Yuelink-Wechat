@@ -6,12 +6,13 @@ var songlinks = [];
 var songs;
 var current = -1;
 var soundManagerReady = false;
+var quality_high = true;
 
 //触发safari下点击事件的nb方法
 function triggerClick(el) {
 	var nodeName = el.nodeName, safari_chrome = /webkit/
 			.test(navigator.userAgent.toLowerCase());
-	if (nodeName == undefined) return false;
+	if (!nodeName) return false;
 	if (safari_chrome && (nodeName != 'INPUT' || nodeName != 'BUTTON')) {
 		try {
 			var evt = document.createEvent('Event');
@@ -39,10 +40,12 @@ function loadsongs(nodeid){
 		});
 }
 
-function expand(index){
-	song = songs[index];
-	var parent = $(".list")[index];
-	parent.innerHTML += genExpandHtml(song);
+function expand(data){
+	for (var i = 0; i < data.related_songs.length; i++){
+		song = songs[i];
+		var parent = $(".list")[i];
+		parent.innerHTML += genExpandHtml(song, i);
+	}
 	$("div.play-button").unbind();
 	$("div.play-button").click(function(evt){
 		triggerClick($("div.item-expand span.sm2-360btn")[0]);
@@ -70,8 +73,7 @@ function getData(data){
 //	alert(JSON.stringify(data));
 	songdata = data;
 	$(".container")[0].innerHTML = genListsHtml(data);
-	for (var i = 0; i < data.related_songs.length; i++)
-		expand(i);
+	expand(data);
 	$(".expand").hide();
 	soundManager.onready(function(){
 //		alert("ready");
@@ -116,11 +118,32 @@ function genListHtml(song, index){
 	return result;
 }
 
-function genExpandHtml(song){
-	var result = '<div class="expand"><div class="good-button button"><div class="good"></div><div class="wrapper"></div>'
+function genExpandHtml(song, index){
+	var result = '<div class="expand"><div class="good-button button" '
+		+'onclick="clickToAddGood('+index+')"><div class="good"></div><div class="wrapper"></div>'
 		+'赞 2,719</div><div class="play-button button"><div class="pause"></div>'
 		+'<div class="wrapper"></div><span class="sm2-timing">00:00</span> / <span class="sm2-time">00:00</span>'
 		+'</div><div class="view-button button"><div class="view"></div><div class="wrapper"></div>浏览 24,953</div></div>';
 
 	return result;
+}
+
+function clickMp3Quality(){
+	if (quality_high){
+		$("div.high-open").attr("class", "high-close");
+		quality_high = false;
+	} else {
+		$("div.high-close").attr("class", "high-open");
+		quality_high = true;
+	}
+}
+
+function clickToAddGood(index){
+	var cn = $("div.good-button").eq(index).attr("class");
+	var p = cn.indexOf("pink");
+	if (p >= 0){
+		$("div.good-button").eq(index).attr("class", cn.substr(0, p-1));
+	} else {
+		$("div.good-button").eq(index).attr("class", cn + " pink");
+	}
 }
