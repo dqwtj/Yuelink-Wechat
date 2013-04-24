@@ -448,7 +448,7 @@ ThreeSixtyPlayer; // constructor
 			}
 
 			sURL = o.getAttribute('href');
-			alert(sURL);
+//			alert(sURL);
 			if (!o.href || !sm.canPlayLink(o)
 					|| self.hasClass(o, self.excludeClass)) {
 				return true; // pass-thru for non-MP3/non-links
