@@ -2,12 +2,12 @@
 var url_domain = "http://" + document.location.host + "/";
 var url_prefix = url_domain + "api/";
 var songdata;
-var songlinks = [];
 var songs;
 var current = -1;
 var soundManagerReady = false;
-var quality_high = true;
+var quality_high = false;
 var playCount = 0;
+var node_id;
 var playCounter = setInterval(function(){
 	playCount += 1;
 	if (playCount == 30){
@@ -35,7 +35,7 @@ function triggerClick(el) {
 }
 
 function loadsongs(nodeid){
-	
+	node_id = nodeid;
 	//var apiurl = 'http://www.yuelink.com/api/nodes/' + nodeid +'.json';
 	var apiurl = url_prefix + 'nodes/' + nodeid +'.json';
 
@@ -59,8 +59,8 @@ function expand(data){
 	});
 }
 
-function expandByIndex(index){
-	if (current == index) return true;
+function expandByIndex(index, strong){
+	if (current == index && !strong) return true;
 	current = index;
 	$(".item-expand").attr("class", "item");
 	$(".expand").hide();
@@ -108,7 +108,6 @@ function genListsHtml(data){
 	$("#singer-title")[0].innerText = name;
 	for (var i = 0; i < songs.length; i++){
 		result += genListHtml(songs[i], i);
-		songlinks.push(songs[i].mp3_url);
 	}
 	return result;
 }
@@ -116,7 +115,7 @@ function genListsHtml(data){
 function genListHtml(song, index){
 	var singer = song.owner;
 	var name = song.name;
-	var mp3 = song.mp3_url;
+	var mp3 = (quality_high?song.hqmp3_url:song.sqmp3_url);
 	var result = '<div class="list" id="ui-'+index+'" onclick="expandByIndex('+index+')"><div class="item"><div class="song-play"><div class="avatar-cover"></div><div class="avatar" style="background: url('+song.pic_channel_url+') 0px 0px no-repeat;"></div>'
 		+ '<div class="ui360"><a href="'+mp3+'"></a></div></div>'
 		+ '<div class="songInfo"><span class="songtitle">'+name+'·'+singer+'</span><span class="comment">'+song.summary+'</span>'
@@ -144,6 +143,15 @@ function clickMp3Quality(){
 		$("div.high-close").attr("class", "high-open");
 		quality_high = true;
 	}
+	updateMp3Url();
+}
+
+function updateMp3Url(){
+	for (var i = 0; i < songs.length; i++){
+		var mp3 = (quality_high?songs[i].hqmp3_url:songs[i].sqmp3_url);
+		$("a").eq(i).attr("href", mp3);
+	}
+	expandByIndex(current, true);
 }
 
 function clickToAddGood(index){
