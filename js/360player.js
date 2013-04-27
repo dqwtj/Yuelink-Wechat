@@ -59,17 +59,17 @@ ThreeSixtyPlayer; // constructor
 			autoPlay : false, // start playing the first sound right away
 			allowMultiple : false, // let many sounds play at once (false =
 									// only one sound playing at a time)
-			loadRingColor : '#ccc', // how much has loaded
-			playRingColor : '#000', // how much has played
-			backgroundRingColor : '#eee', // color shown underneath load +
+			loadRingColor : '#FFF', // how much has loaded
+			playRingColor : '#ff9000', // how much has played
+			backgroundRingColor : '#FFF', // color shown underneath load +
 											// play ("not yet loaded" color)
 
 			// optional segment/annotation (metadata) stuff..
-			segmentRingColor : 'rgba(255,255,255,0.33)', // metadata/annotation
+			segmentRingColor : '#FFF', // metadata/annotation
 															// (segment) colors
-			segmentRingColorAlt : 'rgba(0,0,0,0.1)',
-			loadRingColorMetadata : '#ddd', // "annotations" load color
-			playRingColorMetadata : 'rgba(128,192,256,0.9)', // how much has
+			segmentRingColorAlt : '#FFF',
+			loadRingColorMetadata : '#FFF', // "annotations" load color
+			playRingColorMetadata : '#FFF', // how much has
 																// played when
 																// metadata is
 																// present
@@ -86,7 +86,7 @@ ThreeSixtyPlayer; // constructor
 			// optional: spectrum or EQ graph in canvas (not supported in IE <9,
 			// too slow via ExCanvas)
 			useWaveformData : false,
-			waveformDataColor : '#0099ff',
+			waveformDataColor : '#FFF',
 			waveformDataDownsample : 3, // use only one in X (of a set of 256
 										// values) - 1 means all 256
 			waveformDataOutside : false,
@@ -96,14 +96,14 @@ ThreeSixtyPlayer; // constructor
 
 			// "spectrum frequency" option
 			useEQData : false,
-			eqDataColor : '#339933',
+			eqDataColor : '#FFF',
 			eqDataDownsample : 4, // use only one in X (of 256 values)
 			eqDataOutside : true,
 			eqDataLineRatio : 0.54,
 
 			// enable "amplifier" (canvas pulses like a speaker) effect
 			usePeakData : true,
-			peakDataColor : '#ff33ff',
+			peakDataColor : '#FFF',
 			peakDataOutside : true,
 			peakDataLineRatio : 0.5,
 
@@ -1307,13 +1307,6 @@ ThreeSixtyPlayer; // constructor
 							oLinks[i].parentNode)[0];
 					oBtn = oLinks[i].parentNode.getElementsByTagName('span')[0];
 					self.addEventHandler(oBtn, 'click', self.buttonClick);
-					if (!isTouchDevice) {
-						self.addEventHandler(oCover, 'mousedown',
-								self.mouseDown);
-					} else {
-						self.addEventHandler(oCover, 'touchstart',
-								self.mouseDown);
-					}
 					oCanvasCTX = oCanvas.getContext('2d');
 					oCanvasCTX.translate(radius, radius);
 					oCanvasCTX.rotate(self.deg2rad(-90)); // compensate for
