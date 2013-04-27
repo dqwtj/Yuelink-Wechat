@@ -110,9 +110,9 @@ function genListHtml(song, index){
 	var singer = song.owner;
 	var name = song.name;
 	var mp3 = song.mp3_url;
-	var result = '<div class="list" id="ui-'+index+'"><div class="item"><div class="song-play"><div class="avatar-cover"></div><div class="avatar" style="background: url('+song.pic_normal_url+') 0px 0px no-repeat;"></div>'
+	var result = '<div class="list" id="ui-'+index+'"><div class="item"><div class="song-play"><div class="avatar-cover"></div><div class="avatar" style="background: url('+song.pic_channel_url+') 0px 0px no-repeat;"></div>'
 		+ '<div class="ui360"><a href="'+mp3+'"></a></div></div>'
-		+ '<div class="songInfo" onclick="expandByIndex('+index+')"><span class="songtitle">'+name+'·'+singer+'</span> <br> <span class="comment">黄菊人首席混音师</span>'
+		+ '<div class="songInfo" onclick="expandByIndex('+index+')"><span class="songtitle">'+name+'·'+singer+'</span> <br> <span class="comment">'+song.summary+'</span>'
 			+ '</div></div></div>';
 	
 	return result;
@@ -121,9 +121,9 @@ function genListHtml(song, index){
 function genExpandHtml(song, index){
 	var result = '<div class="expand"><div class="good-button button" '
 		+'onclick="clickToAddGood('+index+')"><div class="good"></div><div class="wrapper"></div>'
-		+'赞 2,719</div><div class="play-button button"><div class="pause"></div>'
+		+'赞 ' + song.wezan_count+'</div><div class="play-button button"><div class="pause"></div>'
 		+'<div class="wrapper"></div><span class="sm2-timing">00:00</span> / <span class="sm2-time">00:00</span>'
-		+'</div><div class="view-button button"><div class="view"></div><div class="wrapper"></div>浏览 24,953</div></div>';
+		+'</div><div class="view-button button"><div class="view"></div><div class="wrapper"></div>浏览 '+song.play_count+'</div></div>';
 
 	return result;
 }

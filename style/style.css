@@ -223,14 +223,14 @@ div.avatar {
 	left: 25px;
 	top: 23px;
 	position: absolute;
-	width: 90px;
-	height: 90px;
+	width: 87px;
+	height: 87px;
 	z-index:13;
 }
 
 div.avatar-cover {
-	left: 25px;
-	top: 23px;
+	left: 24px;
+	top: 22px;
 	position: absolute;
 	width: 90px;
 	height: 90px;
