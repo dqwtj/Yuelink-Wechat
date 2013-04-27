@@ -7,6 +7,13 @@ var songs;
 var current = -1;
 var soundManagerReady = false;
 var quality_high = true;
+var playCount = 0;
+var playCounter = setInterval(function(){
+	playCount += 1;
+	if (playCount == 30){
+		if (current >= 0) addPlayNum(current);
+	}
+}, 1000);
 
 //触发safari下点击事件的nb方法
 function triggerClick(el) {
