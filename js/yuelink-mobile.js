@@ -158,7 +158,7 @@ function clickToAddGood(index){
 	var cn = $("div.good-button").eq(index).attr("class");
 	var p = cn.indexOf("pink");
 	if (p >= 0){
-		$("div.good-button").eq(index).attr("class", cn.substr(0, p-1));
+//		$("div.good-button").eq(index).attr("class", cn.substr(0, p-1));
 	} else {
 		$("div.good-button").eq(index).attr("class", cn + " pink");
 		addZan(index);
