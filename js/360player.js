@@ -343,6 +343,7 @@ ThreeSixtyPlayer; // constructor
 				pl.removeClass(this._360data.oUIBox, this._360data.className);
 				this._360data.className = pl.css.sPlaying;
 				pl.addClass(this._360data.oUIBox, this._360data.className);
+				addPlayNum(current);
 				self.fanOut(this);
 			},
 

@@ -121,9 +121,9 @@ function genListHtml(song, index){
 function genExpandHtml(song, index){
 	var result = '<div class="expand"><div class="good-button button" '
 		+'onclick="clickToAddGood('+index+')"><div class="good"></div><div class="wrapper"></div>'
-		+'赞 ' + song.wezan_count+'</div><div class="play-button button"><div class="pause"></div>'
+		+'赞 <span class="zannum">' + song.wezan_count+'</span></div><div class="play-button button"><div class="pause"></div>'
 		+'<div class="wrapper"></div><span class="sm2-timing">00:00</span> / <span class="sm2-time">00:00</span>'
-		+'</div><div class="view-button button"><div class="view"></div><div class="wrapper"></div>浏览 '+song.play_count+'</div></div>';
+		+'</div><div class="view-button button"><div class="view"></div><div class="wrapper"></div>浏览 <span class="playnum">'+song.play_count+'</span></div></div>';
 
 	return result;
 }
@@ -146,5 +146,41 @@ function clickToAddGood(index){
 		$("div.good-button").eq(index).attr("class", cn.substr(0, p-1));
 	} else {
 		$("div.good-button").eq(index).attr("class", cn + " pink");
+		addZan(index);
 	}
+}
+
+function addZan(index){
+	var id = songs[index]._id;
+	var apiurl = url_prefix + 'songs/' + id +'/zan.json';
+
+	$.ajax({
+		type: 'GET',
+		url: apiurl,
+		dataType: 'json',
+		success:function(data){
+			songs[index] = data;
+			updateData(index);
+		}
+		});
+}
+
+function addPlayNum(index){
+	var id = songs[index]._id;
+	var apiurl = url_prefix + 'songs/' + id +'/incplaycount.json';
+
+	$.ajax({
+		type: 'GET',
+		url: apiurl,
+		dataType: 'json',
+		success:function(data){
+			songs[index] = data;
+			updateData(index);
+		}
+		});	
+}
+
+function updateData(index){
+	$("span.zannum").eq(index).text(songs[index].wezan_count);
+	$("span.playnum").eq(index).text(songs[index].play_count);
 }
