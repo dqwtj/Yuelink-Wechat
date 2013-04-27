@@ -111,7 +111,7 @@ ThreeSixtyPlayer; // constructor
 
 			fontSizeMax : null, // set according to CSS
 
-			scaleArcWidth : 0.38, // thickness factor of playback progress
+			scaleArcWidth : 0.35, // thickness factor of playback progress
 									// ring
 
 			useFavIcon : false

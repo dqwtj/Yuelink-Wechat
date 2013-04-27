@@ -78,8 +78,8 @@ div.good-button {
 	background: url(../img/good-back.png) 0px 0px no-repeat;
 }
 
-div.pink{
-	background: url(../img/pink.png) 0px 0px no-repeat;	
+div.pink {
+	background: url(../img/pink.png) 0px 0px no-repeat;
 }
 
 div.play-button {
@@ -182,10 +182,11 @@ div.view {
 }
 
 div.songInfo {
-	width:80%;
+	width: 80%;
 	position: absolute;
 	left: 138px;
-	top: 0px; text-align : left;
+	top: 0px;
+	text-align: left;
 	padding-top: 30px;
 	text-align: left;
 }
@@ -193,27 +194,28 @@ div.songInfo {
 span.songtitle {
 	font-size: 36px;
 	color: #5E6D81;
-	display:block;
-	width:100%;
+	display: block;
+	width: 100%;
 	overflow: hidden;
 	white-space: nowrap;
-	text-overflow:ellipsis;
+	text-overflow: ellipsis;
 }
 
 span.comment {
 	font-size: 24px;
 	color: #959EAA;
-	display:block;
-	width:100%;
+	display: block;
+	width: 100%;
 	overflow: hidden;
 	white-space: nowrap;
-	text-overflow:ellipsis;
+	text-overflow: ellipsis;
 }
 
 div.song-play {
 	position: absolute;
 	top: 0px;
-	left: 0px; height : 100%;
+	left: 0px;
+	height: 100%;
 	padding: 3px 5px 0px 5px;
 	height: 100%;
 }
@@ -222,17 +224,17 @@ div.avatar {
 	left: 25px;
 	top: 23px;
 	position: absolute;
-	width: 87px;
-	height: 87px;
-	z-index:13;
+	width: 90px;
+	height: 90px;
+	z-index: 13;
 }
 
 div.avatar-cover {
-	left: 24px;
-	top: 22px;
+	left: 17px;
+	top: 16px;
 	position: absolute;
-	width: 90px;
-	height: 90px;
+	width: 105px;
+	height: 105px;
 	background: url(../img/cover.png) 0px 0px no-repeat;
-	z-index:14;	
+	z-index: 14;
 }
