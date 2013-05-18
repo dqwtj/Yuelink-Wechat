@@ -991,6 +991,8 @@ ThreeSixtyPlayer; // constructor
 			if (timeNow !== this._360data.lastTime) {
 				this._360data.lastTime = timeNow;
 				$('span.sm2-timing').text(getTimeStr(timeNow));
+				if (timeNow > 0)
+					$("span.comment").eq(current).text(gl_tmpcomment);
 				$('span.sm2-time').text(
 						getTimeStr(Math.floor(this.durationEstimate / 1000)));
 			}

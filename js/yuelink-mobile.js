@@ -8,6 +8,7 @@ var soundManagerReady = false;
 var quality_high = false;
 var playCount = 0;
 var node_id;
+var gl_tmpcomment;
 var playCounter = setInterval(function(){
 	playCount += 1;
 	if (playCount == 30){
@@ -67,12 +68,15 @@ function expandByIndex(index, strong){
 	$(".expand").css("height", "0px");
 	if (index < 0) return;
 	$(".expand").eq(index).css("height", "149px");
+	//动画过程中简介文字替换为载入中
+	gl_tmpcomment = $("span.comment").eq(index).text();
+	$("span.comment").eq(index).text("载入中...");
 	$(".item")[index].className = "item-expand";
 //	$("div.item-expand span.sm2-360btn").click();
 //	threeSixtyPlayer.events.play();
-	setTimeout(function(){	
+	setTimeout(function(){
 		triggerClick($("div.item-expand span.sm2-360btn")[0]);
-	},350);
+	},250);
 //	$("div.play-button").click();
 }
 
