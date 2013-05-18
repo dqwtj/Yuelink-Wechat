@@ -77,7 +77,7 @@ ThreeSixtyPlayer; // constructor
 			circleDiameter : null, // set dynamically according to values from
 									// CSS
 			circleRadius : null,
-			animDuration : 500,
+			animDuration : 0,
 			animTransition : window.Animator.tx.bouncy, // http://www.berniecode.com/writing/animator.html
 			showHMSTime : false, // hours:minutes:seconds vs. seconds-only
 			scaleFont : true, // also set the font size (if possible) while

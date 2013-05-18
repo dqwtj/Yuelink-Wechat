@@ -63,9 +63,10 @@ function expandByIndex(index, strong){
 	if (current == index && !strong) return true;
 	current = index;
 	$(".item-expand").attr("class", "item");
-	$(".expand").hide();
+//	$(".expand").hide();
+	$(".expand").css("height", "0px");
 	if (index < 0) return;
-	$(".expand").eq(index).slideDown(200);
+	$(".expand").eq(index).css("height", "149px");
 	$(".item")[index].className = "item-expand";
 //	$("div.item-expand span.sm2-360btn").click();
 //	threeSixtyPlayer.events.play();
@@ -81,7 +82,7 @@ function getData(data){
 	songdata = data;
 	$(".container")[0].innerHTML = genListsHtml(data);
 	expand(data);
-	$(".expand").hide();
+//	$(".expand").hide();
 	soundManager.onready(function(){
 //		alert("ready");
 		soundManagerReady = true;
