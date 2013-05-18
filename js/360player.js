@@ -433,6 +433,8 @@ ThreeSixtyPlayer; // constructor
 				// only catch left-clicks
 				return true;
 			}
+//			alert(11);
+			
 
 			var o = self.getTheDamnLink(e), sURL, soundURL, thisSound, oContainer, has_vis, diameter;
 			
@@ -717,7 +719,6 @@ ThreeSixtyPlayer; // constructor
 		};
 
 		this.buttonClick = function(e) {
-//			alert(8);
 			var o = e ? (e.target ? e.target : e.srcElement)
 					: window.event.srcElement;
 			self.handleClick({
