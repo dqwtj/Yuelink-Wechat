@@ -72,7 +72,7 @@ function expandByIndex(index, strong){
 //	threeSixtyPlayer.events.play();
 	setTimeout(function(){	
 		triggerClick($("div.item-expand span.sm2-360btn")[0]);
-	},20);
+	},350);
 //	$("div.play-button").click();
 }
 
