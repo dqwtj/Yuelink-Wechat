@@ -47,7 +47,7 @@ div.topBar {
 div.bottomBar {
 	height: 138px;
 	width: 630px;
-	margin: 3px 5px 5px 5px;
+	margin: 5px 5px 5px 5px;
 	z-index: 1000;
 	background: url(../img/bottombar.png) 0px 0px no-repeat;
 }
