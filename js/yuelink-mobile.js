@@ -106,6 +106,8 @@ function genListsHtml(data){
 	songs = data.related_songs;
 	var name = data.name;
 	$("#singer-title")[0].innerText = name;
+//	alert(data.summary);
+	$("#singer-intro")[0].innerText = data.summary;
 	for (var i = 0; i < songs.length; i++){
 		result += genListHtml(songs[i], i);
 	}
@@ -151,7 +153,8 @@ function updateMp3Url(){
 		var mp3 = (quality_high?songs[i].hqmp3_url:songs[i].sqmp3_url);
 		$("a").eq(i).attr("href", mp3);
 	}
-	expandByIndex(current, true);
+	//高品质按钮按下不影响当前播放歌曲，从顺序播放下一首开始
+//	expandByIndex(current, true);
 }
 
 function clickToAddGood(index){

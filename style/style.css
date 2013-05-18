@@ -185,9 +185,8 @@ div.songInfo {
 	width: 80%;
 	position: absolute;
 	left: 138px;
-	top: 0px;
+	top: 38px;
 	text-align: left;
-	padding-top: 30px;
 	text-align: left;
 }
 
@@ -202,6 +201,7 @@ span.songtitle {
 }
 
 span.comment {
+	margin-top: 7px;
 	font-size: 24px;
 	color: #959EAA;
 	display: block;
